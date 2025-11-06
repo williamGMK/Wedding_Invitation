@@ -59,22 +59,7 @@ mkdir silver-anniversary
 cd silver-anniversary
 Set up the file structure
 
-text
-silver-anniversary/
-├── index.html
-├── dashboard.html
-├── styles/
-│   ├── main.css
-│   └── dashboard.css
-├── js/
-│   ├── main.js
-│   ├── dashboard.js
-│   └── components.js
-└── server/
-    ├── server.js
-    ├── package.json
-    └── .env
-Install server dependencies
+
 
 bash
 cd server
@@ -87,15 +72,14 @@ MONGODB_URI=mongodb://localhost:27017/silver_anniversary
 PORT=3000
 Start MongoDB
 
-bash
-# If using local MongoDB
-mongod
 
-# Or use MongoDB Atlas cloud service
+
+# MongoDB Atlas cloud service
 Start the server
 
 bash
 cd server
+nodemond: npm install
 npm start
 Access the application
 
@@ -105,22 +89,7 @@ Dashboard: http://localhost:3000/dashboard.html
 
 Dashboard Password: Aziza@Eric25An
 
-📁 Project Structure
-text
-silver-anniversary/
-├── index.html                 # Main anniversary website
-├── dashboard.html            # Admin dashboard
-├── styles/
-│   ├── main.css              # Styles for main website
-│   └── dashboard.css         # Styles for dashboard
-├── js/
-│   ├── components.js         # Reusable components (sliders, animations, etc.)
-│   ├── main.js               # Main website functionality
-│   └── dashboard.js          # Dashboard functionality
-└── server/
-    ├── server.js             # Express.js server
-    ├── package.json          # Node.js dependencies
-    └── .env                  # Environment variables
+
 🛠️ Technical Details
 Frontend Technologies
 HTML5: Semantic markup
@@ -150,33 +119,7 @@ Mongoose: ODM for MongoDB
 
 CORS: Cross-origin resource sharing
 
-Key Features Implementation
-RSVP System
-Frontend validation with fallback to localStorage
 
-MongoDB integration for persistent storage
-
-Real-time dashboard updates
-
-CSV/JSON export functionality
-
-Animations & Effects
-CSS keyframe animations
-
-JavaScript-powered interactive elements
-
-Parallax scrolling effects
-
-Confetti celebration effects
-
-Responsive Design
-Mobile-first approach
-
-Flexible grid layouts
-
-Touch-friendly interfaces
-
-Cross-browser compatibility
 
 🔧 Configuration
 Customizing the Website
