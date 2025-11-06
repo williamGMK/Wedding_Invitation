@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Eric & Aziza Lucie - Celebrating 25 Years of Marriage - December 13, 2025"
+    />
+    <title>Eric & Aziza Lucie - Silver Anniversary Celebration</title>
+
+    <!-- External Styles -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <!-- Loading Animation -->
+    <div class="loader" id="pageLoader"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+      <i class="fas fa-music"></i>
+      <audio id="backgroundMusic" loop>
+        <source
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastNotification">
+      <i class="fas fa-check-circle"></i>
+      <div>
+        <div class="toast-title">Success!</div>
+        <div class="toast-message">Your RSVP has been submitted</div>
+      </div>
+    </div>
+
+    <!-- RSVP Modal -->
+    <div class="modal-overlay" id="rsvpModal">
+      <div class="rsvp-modal" id="rsvpFormContainer">
+        <button class="close-modal" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="modal-header">
+          <h2>RSVP</h2>
+          <p>We can't wait to celebrate with you!</p>
+        </div>
+        <form id="rsvpForm">
+          <div class="form-group">
+            <label for="guestName">Full Name</label>
+            <input type="text" id="guestName" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="guestEmail">Email Address</label>
+            <input type="email" id="guestEmail" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="guestCount">Number of Guests</label>
+            <select id="guestCount" class="form-control" required>
+              <option value="">Select number of guests</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Will you be attending?</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="attendingYes"
+                  name="attending"
+                  value="Yes"
+                  required
+                />
+                <label for="attendingYes">Yes, I'll be there!</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="attendingNo"
+                  name="attending"
+                  value="No"
+                  required
+                />
+                <label for="attendingNo">Sorry, I can't make it</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="guestMessage">Message (Optional)</label>
+            <textarea
+              id="guestMessage"
+              class="form-control"
+              rows="4"
+              placeholder="Share a memory or well-wishes..."
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Submit RSVP</button>
+          <button type="button" class="exit-btn" id="exitRsvp">Exit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- NEW: Password Modal -->
+    <div class="modal-overlay" id="passwordModal">
+      <div class="password-modal">
+        <div class="modal-header">
+          <h2>RSVP Dashboard</h2>
+          <p>Enter the password to access the dashboard</p>
+        </div>
+        <form class="password-form" id="passwordForm">
+          <input
+            type="password"
+            class="password-input"
+            id="dashboardPassword"
+            placeholder="Enter password"
+            required
+          />
+          <div class="password-error" id="passwordError">
+            <i class="fas fa-exclamation-circle"></i> Incorrect password. Please
+            try again.
+          </div>
+          <button type="submit" class="password-submit">
+            Access Dashboard
+          </button>
+          <button type="button" class="exit-btn" id="exitPassword">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+      <span class="gallery-close" id="galleryClose">
+        <i class="fas fa-times"></i>
+      </span>
+      <img src="" alt="" id="galleryImage" />
+    </div>
+
+    <header class="hero-section w3-grayscale-min fade-in parallax" id="home">
+      <div class="w3-center w3-text-white">
+        <h1 class="hero-title animate__animated animate__fadeInDown">
+          Eric & Aziza
+        </h1>
+        <h2 class="subtitle animate__animated animate__fadeInUp">
+          25 Years of Love & Togetherness
+        </h2>
+        <div class="date-display bounce-in animate__animated animate__zoomIn">
+          <i class="fas fa-heart"></i> December 13, 2025
+          <i class="fas fa-heart"></i>
+        </div>
+        <div class="anniversary-text animate__animated animate__fadeIn">
+          Silver Anniversary
+        </div>
+      </div>
+    </header>
+
+    <nav class="navbar w3-hide-small" aria-label="Main Navigation">
+      <a href="#home" class="active"
+        ><i class="fas fa-home"></i> <span>Home</span></a
+      >
+      <a href="#us"><i class="fas fa-heart"></i> <span>Our Story</span></a>
+      <a href="#memories"
+        ><i class="fas fa-images"></i> <span>Memories</span></a
+      >
+      <a href="#celebration"
+        ><i class="fas fa-glass-cheers"></i> <span>Celebration</span></a
+      >
+      <a href="#rsvp"><i class="fas fa-envelope"></i> <span>RSVP</span></a>
+      <!-- NEW: Dashboard Link -->
+      <a href="#" id="dashboardLink"
+        ><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a
+      >
+    </nav>
+
+    <main>
+      <section
+        class="content-section pale-section w3-grayscale-min fade-up"
+        id="us"
+      >
+        <div class="w3-content w3-center">
+          <h1 class="section-title">Our Journey</h1>
+          <div class="slider-container fade-up">
+            <div class="slider">
+              <img
+                src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Eric and Aziza together"
+                class="optimized-img"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Family moment"
+                class="optimized-img"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Celebration photo"
+                class="optimized-img"
+              />
+            </div>
+            <button class="slider-btn prev" aria-label="Previous slide">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next" aria-label="Next slide">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="slider-dots">
+              <span class="dot active" data-slide="0"></span>
+              <span class="dot" data-slide="1"></span>
+              <span class="dot" data-slide="2"></span>
+            </div>
+          </div>
+          <p class="w3-large">
+            <i
+              >"Twenty-five years ago, we promised to love, honor, and cherish
+              each other. Through all of life's adventures, our love has only
+              grown stronger. We're excited to celebrate this milestone with our
+              cherished family and friends."</i
+            >
+          </p>
+
+          <!-- Love Meter -->
+          <div class="love-meter">
+            <div class="love-fill" id="loveFill"></div>
+            <div class="love-text" id="loveText">Our Love: 25 Years</div>
+          </div>
+
+          <p>
+            <a href="#celebration" class="wedding-btn"
+              >Celebration Details <i class="fas fa-arrow-right"></i
+            ></a>
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section fade-up" id="memories">
+        <div class="w3-content">
+          <h1 class="section-title w3-center">Our Timeline</h1>
+          <div class="timeline">
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <h3>2000</h3>
+                <p>
+                  The year we met and fell in love. It was a beautiful summer
+                  that changed our lives forever.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <h3>December 13, 2000</h3>
+                <p>
+                  Our wedding day! We exchanged vows surrounded by family and
+                  friends, beginning our journey together.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <h3>2005</h3>
+                <p>
+                  Welcomed our first child, a beautiful daughter who brought so
+                  much joy to our lives.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <h3>2008</h3>
+                <p>
+                  Our family grew again with the arrival of our son, completing
+                  our beautiful family.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <h3>2015</h3>
+                <p>
+                  Celebrated 15 years together with a romantic trip to Paris,
+                  the city of love.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <h3>2020</h3>
+                <p>
+                  Twenty years of marriage! We renewed our vows in an intimate
+                  ceremony with close family.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <h3>2025</h3>
+                <p>
+                  Our Silver Anniversary! 25 years of love, laughter, and
+                  cherished memories.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Memory Tree -->
+          <div class="memory-tree">
+            <div class="tree-branches">
+              <div class="tree-branch" data-year="2000">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="tree-branch" data-year="2005">
+                <i class="fas fa-baby"></i>
+              </div>
+              <div class="tree-branch" data-year="2008">
+                <i class="fas fa-child"></i>
+              </div>
+              <div class="tree-branch" data-year="2015">
+                <i class="fas fa-plane"></i>
+              </div>
+              <div class="tree-branch" data-year="2020">
+                <i class="fas fa-ring"></i>
+              </div>
+            </div>
+            <div class="tree-trunk"></div>
+            <div
+              id="memoryDetails"
+              class="w3-center"
+              style="margin-top: 20px; min-height: 60px"
+            >
+              Click on a branch to see a special memory
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="invitation-section parallax">
+        <div class="w3-center w3-text-white">
+          <h1 class="hero-title">You Are Invited</h1>
+          <h2 class="subtitle">To celebrate 25 years of our love story</h2>
+        </div>
+      </section>
+
+      <section
+        class="content-section pale-section w3-grayscale-min fade-up"
+        id="celebration"
+      >
+        <div class="w3-content">
+          <h1 class="section-title w3-center">The Celebration</h1>
+          <img
+            class="w3-round-large w3-grayscale-min bounce-in optimized-img"
+            src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            style="
+              width: 100%;
+              margin: 40px 0;
+              border-radius: 15px;
+              box-shadow: var(--shadow-medium);
+            "
+            alt="Celebration venue - Beautiful Garden"
+          />
+          <div class="w3-row-padding" style="margin-top: 50px">
+            <div class="w3-half w3-margin-bottom">
+              <div class="details-card">
+                <i class="fas fa-clock"></i>
+                <h3>When</h3>
+                <p><strong>Welcome Reception</strong> – 4:00 PM</p>
+                <p><strong>Dinner & Toasts</strong> – 6:00 PM</p>
+                <p><strong>Dancing & Celebration</strong> – 8:00 PM</p>
+              </div>
+            </div>
+            <div class="w3-half w3-margin-bottom">
+              <div class="details-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Where</h3>
+                <p><strong>The Grand Ballroom</strong></p>
+                <p>123 Celebration Avenue</p>
+                <p>Happytown, 12345</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Love Quote Carousel -->
+          <div class="quote-carousel">
+            <div class="quote-slide active">
+              <p class="quote-text">
+                "The best thing to hold onto in life is each other."
+              </p>
+              <p class="quote-author">- Audrey Hepburn</p>
+            </div>
+            <div class="quote-slide">
+              <p class="quote-text">
+                "A successful marriage requires falling in love many times,
+                always with the same person."
+              </p>
+              <p class="quote-author">- Mignon McLaughlin</p>
+            </div>
+            <div class="quote-slide">
+              <p class="quote-text">
+                "Love doesn't make the world go round. Love is what makes the
+                ride worthwhile."
+              </p>
+              <p class="quote-author">- Franklin P. Jones</p>
+            </div>
+          </div>
+
+          <!-- Photo Gallery -->
+          <div class="photo-gallery">
+            <div class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Wedding photo"
+                data-full="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Anniversary celebration"
+                data-full="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Family portrait"
+                data-full="https://images.unsplash.com/photo-1537633552985-df8429e8048b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Vacation memory"
+                data-full="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+              />
+            </div>
+          </div>
+
+          <!-- Guestbook Section -->
+          <div class="guestbook fade-up">
+            <h3>Messages from Loved Ones</h3>
+            <div class="guestbook-entry">
+              <div class="guest-name">Sarah Johnson</div>
+              <div class="guest-message">
+                "Congratulations on 25 beautiful years! Your love story has
+                always been an inspiration."
+              </div>
+            </div>
+            <div class="guestbook-entry">
+              <div class="guest-name">Michael & Emily Chen</div>
+              <div class="guest-message">
+                "Wishing you continued happiness and many more years of love and
+                laughter together!"
+              </div>
+            </div>
+            <div class="guestbook-entry">
+              <div class="guest-name">The Williams Family</div>
+              <div class="guest-message">
+                "Your marriage is a beautiful example of commitment and love.
+                Cheers to 25 years!"
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section w3-center fade-up" id="rsvp">
+        <h1 class="section-title">Join Our Celebration!</h1>
+        <p class="w3-large" style="font-size: 1.3rem">
+          Kindly respond by November 30, 2025
+        </p>
+        <p class="w3-xlarge" style="margin-top: 30px">
+          <button class="rsvp-btn" id="openRsvp">
+            RSVP Now <i class="fas fa-paper-plane"></i>
+          </button>
+        </p>
+      </section>
+
+      <section class="content-section w3-center fade-up" id="countdown">
+        <h2 class="section-title">Countdown to Our Silver Anniversary</h2>
+        <div class="countdown-container" id="countdown-timer">
+          <div class="countdown-item">
+            <div class="countdown-value" id="days">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="minutes">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="seconds">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="w3-center fade-up">
+      <p>
+        Created with <span class="heart"><i class="fas fa-heart"></i></span> for
+        Eric & Aziza's Silver Anniversary
+      </p>
+      <p class="w3-small" style="margin-top: 10px">
+        With love from the Lucie Family
+      </p>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

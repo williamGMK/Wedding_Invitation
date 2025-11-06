@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSVP Dashboard - Eric & Aziza's Silver Anniversary</title>
+
+    <!-- External Styles -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="styles/dashboard.css" />
+  </head>
+  <body>
+    <header class="dashboard-header">
+      <div class="w3-content">
+        <h1 class="dashboard-title">RSVP Dashboard</h1>
+        <p class="dashboard-subtitle">
+          Eric & Aziza's Silver Anniversary - December 13, 2025
+        </p>
+        <a href="index.html" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+          Back to Main Site
+        </a>
+      </div>
+    </header>
+
+    <main class="dashboard-container">
+      <!-- Statistics Overview -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <i class="fas fa-users stat-icon"></i>
+          <div class="stat-number" id="totalGuests">0</div>
+          <div class="stat-label">Total Guests</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-check-circle stat-icon"></i>
+          <div class="stat-number" id="attendingGuests">0</div>
+          <div class="stat-label">Attending</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-times-circle stat-icon"></i>
+          <div class="stat-number" id="notAttendingGuests">0</div>
+          <div class="stat-label">Not Attending</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-user-plus stat-icon"></i>
+          <div class="stat-number" id="totalResponses">0</div>
+          <div class="stat-label">Total Responses</div>
+        </div>
+      </div>
+
+      <!-- RSVP List Section -->
+      <div class="dashboard-section">
+        <h2 class="section-title">
+          <i class="fas fa-list-alt"></i>
+          Guest Responses
+        </h2>
+
+        <div class="controls">
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search by name or email..."
+          />
+          <select id="attendingFilter" class="filter-select">
+            <option value="all">All Responses</option>
+            <option value="Yes">Attending</option>
+            <option value="No">Not Attending</option>
+          </select>
+          <button class="action-btn" id="refreshBtn">
+            <i class="fas fa-sync-alt"></i>
+            Refresh
+          </button>
+          <button class="action-btn" id="clearSearchBtn">
+            <i class="fas fa-times"></i>
+            Clear
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="rsvp-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Guests</th>
+                <th>Message</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="rsvpTableBody">
+              <!-- RSVP data will be populated here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display: none">
+          <i class="fas fa-inbox"></i>
+          <h3>No RSVPs Yet</h3>
+          <p>
+            Guest responses will appear here once they start submitting RSVPs.
+          </p>
+        </div>
+      </div>
+
+      <!-- Export Section -->
+      <div class="export-section">
+        <h2 class="section-title">
+          <i class="fas fa-download"></i>
+          Export Data
+        </h2>
+        <div class="export-buttons">
+          <button class="export-btn" id="exportCSV">
+            <i class="fas fa-file-csv"></i>
+            Export as CSV
+          </button>
+          <button class="export-btn secondary" id="exportJSON">
+            <i class="fas fa-file-code"></i>
+            Export as JSON
+          </button>
+          <button class="export-btn secondary" id="printList">
+            <i class="fas fa-print"></i>
+            Print List
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript Files -->
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
